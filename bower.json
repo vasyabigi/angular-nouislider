@@ -1,7 +1,11 @@
 {
   "name": "angular-nouislider",
-  "version": "0.1.0",
+  "homepage": "https://github.com/vasyabigi/angular-nouislider",
+  "version": "0.1.1",
   "main": "dist/nouislider.js",
+  "ignore": [
+    "app"
+  ],
   "keywords": [
     "angular",
     "slider",

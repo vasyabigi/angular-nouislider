@@ -5,10 +5,10 @@ angular.module('nouislider').directive('slider', function () {
   return {
     restrict: 'A',
     scope: {
-      ngModel: '=',
       start: '@',
       step: '@',
       end: '@',
+      ngModel: '=',
       ngFrom: '=',
       ngTo: '='
     },
