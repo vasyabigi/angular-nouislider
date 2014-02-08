@@ -3,12 +3,16 @@
   <h4 ng-init="test.first = 5">Slider example with initial data:</h4>
   <div slider ng-model="test.first" start=1 end=10></div>
   <p>Binded data: <span ng-bind="test.first"></span></p>
+  <p>Data: <input type="number" ng-model="test.first"></p>
 
   <h4>Slider example without initial data:</h4>
-  <div slider ng-model="test.second" start=0 end=100 step=10></div>
+  <div slider ng-model="test.second" start=0 end=100></div>
   <p>Binded data: <span ng-bind="test.second"></span></p>
+  <p>Data: <input type="number" ng-model="test.second"></p>
 
   <h4 ng-init="test.from = 5; test.to = 10">Range example:</h4>
   <div slider ng-from="test.from" ng-to="test.to" start=0 end=30 step=2></div>
   <p>Binded data: from - <span ng-bind="test.from"></span>, to - <span ng-bind="test.to"></span></p>
+  <p>From data: <input type="number" ng-model="test.from"></p>
+  <p>To data: <input type="number" ng-model="test.to"></p>
 </div>

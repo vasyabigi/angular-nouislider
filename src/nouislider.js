@@ -13,10 +13,12 @@ angular.module('nouislider').directive('slider', function () {
       ngTo: '='
     },
     link: function (scope, element, attrs) {
-      var slider;
+      var fromParsed, parsedValue, slider, toParsed;
       slider = $(element);
       if (scope.ngFrom != null && scope.ngTo != null) {
-        return slider.noUiSlider({
+        fromParsed = null;
+        toParsed = null;
+        slider.noUiSlider({
           range: [
             scope.start,
             scope.end
@@ -28,14 +30,33 @@ angular.module('nouislider').directive('slider', function () {
           connect: true
         }).change(function (ev) {
           var from, to, _ref;
-          _ref = $(ev.target).val(), from = _ref[0], to = _ref[1];
+          _ref = slider.val(), from = _ref[0], to = _ref[1];
+          fromParsed = parseInt(from, 10);
+          toParsed = parseInt(from, 10);
           return scope.$apply(function () {
-            scope.ngFrom = parseInt(from, 10);
-            return scope.ngTo = parseInt(to, 10);
+            scope.ngFrom = fromParsed;
+            return scope.ngTo = toParsed;
           });
         });
+        scope.$watch('ngFrom', function (newVal, oldVal) {
+          if (newVal !== fromParsed) {
+            return slider.val([
+              newVal,
+              null
+            ]);
+          }
+        });
+        return scope.$watch('ngTo', function (newVal, oldVal) {
+          if (newVal !== toParsed) {
+            return slider.val([
+              null,
+              newVal
+            ]);
+          }
+        });
       } else {
-        return slider.noUiSlider({
+        parsedValue = null;
+        slider.noUiSlider({
           range: [
             scope.start,
             scope.end
@@ -44,9 +65,15 @@ angular.module('nouislider').directive('slider', function () {
           step: scope.step,
           handles: 1
         }).change(function (ev) {
+          parsedValue = slider.val();
           return scope.$apply(function () {
-            return scope.ngModel = parseInt($(ev.target).val(), 10);
+            return scope.ngModel = parseInt(parsedValue, 10);
           });
+        });
+        return scope.$watch('ngModel', function (newVal, oldVal) {
+          if (newVal !== parsedValue) {
+            return slider.val(newVal);
+          }
         });
       }
     }
