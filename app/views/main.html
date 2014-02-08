@@ -1,0 +1,14 @@
+<div>
+  <h3>Simple angular directive for <a target="_blank" href="http://refreshless.com/nouislider/">noUiSlider</a></h3>
+  <h4 ng-init="test.first = 5">Slider example with initial data:</h4>
+  <div slider ng-model="test.first" start=1 end=10></div>
+  <p>Binded data: <span ng-bind="test.first"></span></p>
+
+  <h4>Slider example without initial data:</h4>
+  <div slider ng-model="test.second" start=0 end=100 step=10></div>
+  <p>Binded data: <span ng-bind="test.second"></span></p>
+
+  <h4 ng-init="test.from = 5; test.to = 10">Range example:</h4>
+  <div slider ng-from="test.from" ng-to="test.to" start=0 end=30 step=2></div>
+  <p>Binded data: from - <span ng-bind="test.from"></span>, to - <span ng-bind="test.to"></span></p>
+</div>

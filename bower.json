@@ -1,0 +1,21 @@
+{
+  "name": "angular-nouislider",
+  "version": "0.1.0",
+  "main": "dist/nouislider.js",
+  "keywords": [
+    "angular",
+    "slider",
+    "range",
+    "touch",
+    "input",
+    "slide"
+  ],
+  "dependencies": {
+    "angular": "~1.2.6",
+    "jquery": "~2.1.0",
+    "nouislider": "~5.0.0"
+  },
+  "author": {
+    "name": "Vasyl Stanislavchuk"
+  }
+}
