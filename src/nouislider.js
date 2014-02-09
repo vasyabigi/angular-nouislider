@@ -27,12 +27,17 @@ angular.module('nouislider').directive('slider', function () {
             scope.ngFrom || scope.start,
             scope.ngTo || scope.end
           ],
+          step: scope.step || 1,
           connect: true
         }).change(function (ev) {
           var from, to, _ref;
           _ref = slider.val(), from = _ref[0], to = _ref[1];
           fromParsed = parseInt(from, 10);
-          toParsed = parseInt(from, 10);
+          toParsed = parseInt(to, 10);
+          scope.values = [
+            fromParsed,
+            toParsed
+          ];
           return scope.$apply(function () {
             scope.ngFrom = fromParsed;
             return scope.ngTo = toParsed;
@@ -48,6 +53,7 @@ angular.module('nouislider').directive('slider', function () {
         });
         return scope.$watch('ngTo', function (newVal, oldVal) {
           if (newVal !== toParsed) {
+            toParsed = newVal;
             return slider.val([
               null,
               newVal
@@ -62,7 +68,7 @@ angular.module('nouislider').directive('slider', function () {
             scope.end
           ],
           start: scope.ngModel || scope.start,
-          step: scope.step,
+          step: scope.step || 1,
           handles: 1
         }).change(function (ev) {
           parsedValue = slider.val();
@@ -72,6 +78,7 @@ angular.module('nouislider').directive('slider', function () {
         });
         return scope.$watch('ngModel', function (newVal, oldVal) {
           if (newVal !== parsedValue) {
+            parsedValue = newVal;
             return slider.val(newVal);
           }
         });
