@@ -1,7 +1,7 @@
 angular-nouislider
 ==================
 
-Simple angular directive for jquery [nouislider](http://refreshless.com/nouislider/)
+Simple angular directive for jquery [nouislider](http://refreshless.com/nouislider/) plugin.
 
 ### Usage:
 
@@ -30,6 +30,5 @@ angular.module('MyApp', ['nouislider']);
 ```
 
 That's it!
-
 
 ![example](https://raw2.github.com/vasyabigi/angular-nouislider/master/example.jpg "angular-nouislider")
