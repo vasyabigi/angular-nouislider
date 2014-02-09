@@ -19,10 +19,9 @@
     <div class="wrapper">
       <header>
         <h1>Angular-nouislider</h1>
-        <p>Simple angular directive for jquery nouislider plugin</p>
+        <p>Simple angular directive for jquery <a href="http://refreshless.com/nouislider/" target="_blank">nouislider</a> plugin</p>
 
         <p class="view"><a href="https://github.com/vasyabigi/angular-nouislider">View the Project on GitHub <small>vasyabigi/angular-nouislider</small></a></p>
-
 
         <ul>
           <li><a href="https://github.com/vasyabigi/angular-nouislider/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -42,6 +41,33 @@
         <div slider ng-from="test.from" ng-to="test.to" start=0 end=100 step=5></div>
         <p>Binded data: from - <span ng-bind="test.from"></span>, to - <span ng-bind="test.to"></span></p>
         <p>From: <input type="number" ng-model="test.from">, To: <input type="number" ng-model="test.to"></p>
+
+        <h3><a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage:</h3>
+
+<ul>
+<li>Install: <code>bower install angular-nouislider</code>
+</li>
+<li>Add <code>jquery</code>, <code>angular</code>, <code>nouislider</code> and <code>angular-nouislider</code> to your code:</li>
+</ul><div class="highlight highlight-html"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"bower_components/nouislider/jquery.nouislider.css"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bower_components/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bower_components/angular/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bower_components/nouislider/jquery.nouislider.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bower_components/angular-nouislider/src/nouislider.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<ul>
+<li>Add a dependency to the <code>nouislider</code> module in your application.</li>
+</ul><div class="highlight highlight-js"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'MyApp'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'nouislider'</span><span class="p">]);</span>
+</pre></div>
+
+<ul>
+<li>Add a <code>slider</code> attribute to your <code>&lt;div&gt;</code> tag:</li>
+</ul><div class="highlight highlight-html"><pre><span class="nt">&lt;div</span> <span class="na">slider</span> <span class="na">ng-model=</span><span class="s">"test.single"</span> <span class="na">start=</span><span class="s">1</span> <span class="na">end=</span><span class="s">10</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">slider</span> <span class="na">ng-from=</span><span class="s">"test.from"</span> <span class="na">ng-to=</span><span class="s">"test.to"</span> <span class="na">start=</span><span class="s">0</span> <span class="na">end=</span><span class="s">100</span> <span class="na">step=</span><span class="s">5</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+
+        <p>That's it!</p>
+
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/vasyabigi">vasyabigi</a></p>
