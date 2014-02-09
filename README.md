@@ -5,7 +5,7 @@ Simple angular directive for jquery [nouislider](http://refreshless.com/nouislid
 
 ### Usage:
 
-- Just install: `bower install angular-nouislider`
+- Install: `bower install angular-nouislider`
 - Add `jquery`, `angular`, `nouislider` and `angular-nouislider` to your code:
 
 ```html
@@ -30,3 +30,6 @@ angular.module('MyApp', ['nouislider']);
 ```
 
 That's it!
+
+
+![example](https://raw2.github.com/vasyabigi/angular-nouislider/master/example.jpg "angular-nouislider")
