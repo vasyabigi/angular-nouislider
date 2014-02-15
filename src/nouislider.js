@@ -1,7 +1,5 @@
 'use strict';
-angular.module('nouislider', []);
-'use strict';
-angular.module('nouislider').directive('slider', function () {
+angular.module('nouislider', []).directive('slider', function () {
   return {
     restrict: 'A',
     scope: {
@@ -53,7 +51,6 @@ angular.module('nouislider').directive('slider', function () {
         });
         return scope.$watch('ngTo', function (newVal, oldVal) {
           if (newVal !== toParsed) {
-            toParsed = newVal;
             return slider.val([
               null,
               newVal
@@ -78,7 +75,6 @@ angular.module('nouislider').directive('slider', function () {
         });
         return scope.$watch('ngModel', function (newVal, oldVal) {
           if (newVal !== parsedValue) {
-            parsedValue = newVal;
             return slider.val(newVal);
           }
         });
