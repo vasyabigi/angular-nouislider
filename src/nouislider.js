@@ -30,8 +30,8 @@ angular.module('nouislider', []).directive('slider', function () {
         }).change(function (ev) {
           var from, to, _ref;
           _ref = slider.val(), from = _ref[0], to = _ref[1];
-          fromParsed = parseInt(from, 10);
-          toParsed = parseInt(to, 10);
+          fromParsed = parseFloat(from);
+          toParsed = parseFloat(to);
           scope.values = [
             fromParsed,
             toParsed
@@ -70,7 +70,7 @@ angular.module('nouislider', []).directive('slider', function () {
         }).change(function (ev) {
           parsedValue = slider.val();
           return scope.$apply(function () {
-            return scope.ngModel = parseInt(parsedValue, 10);
+            return scope.ngModel = parseFloat(parsedValue);
           });
         });
         return scope.$watch('ngModel', function (newVal, oldVal) {

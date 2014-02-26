@@ -1,7 +1,7 @@
 {
   "name": "angular-nouislider",
   "homepage": "http://vasyabigi.github.io/angular-nouislider/",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "src/nouislider.js",
   "ignore": [
     "app"
