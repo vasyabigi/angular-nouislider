@@ -26,8 +26,8 @@ angular.module('nouislider', [])
         ).change((ev) ->
           [from, to] = slider.val()
 
-          fromParsed = parseInt from, 10
-          toParsed = parseInt to, 10
+          fromParsed = parseFloat from
+          toParsed = parseFloat to
 
           scope.values = [fromParsed, toParsed]
 
@@ -58,7 +58,7 @@ angular.module('nouislider', [])
           parsedValue = slider.val()
 
           scope.$apply(->
-            scope.ngModel = parseInt parsedValue, 10
+            scope.ngModel = parseFloat parsedValue
           )
         )
 
