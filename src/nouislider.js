@@ -26,20 +26,21 @@ angular.module('nouislider', []).directive('slider', function () {
             scope.ngTo || scope.end
           ],
           step: scope.step || 1,
-          connect: true
-        }).change(function (ev) {
-          var from, to, _ref;
-          _ref = slider.val(), from = _ref[0], to = _ref[1];
-          fromParsed = parseFloat(from);
-          toParsed = parseFloat(to);
-          scope.values = [
-            fromParsed,
-            toParsed
-          ];
-          return scope.$apply(function () {
-            scope.ngFrom = fromParsed;
-            return scope.ngTo = toParsed;
-          });
+          connect: true,
+          slide: function () {
+            var from, to, _ref;
+            _ref = slider.val(), from = _ref[0], to = _ref[1];
+            fromParsed = parseFloat(from);
+            toParsed = parseFloat(to);
+            scope.values = [
+              fromParsed,
+              toParsed
+            ];
+            return scope.$apply(function () {
+              scope.ngFrom = fromParsed;
+              return scope.ngTo = toParsed;
+            });
+          }
         });
         scope.$watch('ngFrom', function (newVal, oldVal) {
           if (newVal !== fromParsed) {
@@ -66,12 +67,13 @@ angular.module('nouislider', []).directive('slider', function () {
           ],
           start: scope.ngModel || scope.start,
           step: scope.step || 1,
-          handles: 1
-        }).change(function (ev) {
-          parsedValue = slider.val();
-          return scope.$apply(function () {
-            return scope.ngModel = parseFloat(parsedValue);
-          });
+          handles: 1,
+          slide: function () {
+            parsedValue = slider.val();
+            return scope.$apply(function () {
+              return scope.ngModel = parseFloat(parsedValue);
+            });
+          }
         });
         return scope.$watch('ngModel', function (newVal, oldVal) {
           if (newVal !== parsedValue) {
@@ -81,4 +83,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/
