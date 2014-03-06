@@ -1,7 +1,7 @@
 {
   "name": "angular-nouislider",
-  "homepage": "https://github.com/vasyabigi/angular-nouislider",
-  "version": "0.1.5",
+  "homepage": "http://vasyabigi.github.io/angular-nouislider/",
+  "version": "0.2.4",
   "main": "src/nouislider.js",
   "ignore": [
     "app"
@@ -22,13 +22,13 @@
   "author": {
     "name": "Vasyl Stanislavchuk"
   },
-  "_release": "0.1.5",
+  "_release": "0.2.4",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.5",
-    "commit": "434874e2147d6615d7b86ce313c42524a349e4e1"
+    "tag": "0.2.4",
+    "commit": "aaea61a0aae31244cdfba7b04fe14a3769292895"
   },
   "_source": "git://github.com/vasyabigi/angular-nouislider.git",
-  "_target": "~0.1.5",
+  "_target": "~0.2.4",
   "_originalSource": "angular-nouislider"
 }
