@@ -83,6 +83,4 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});  /*
-//@ sourceMappingURL=app.js.map
-*/
+});
