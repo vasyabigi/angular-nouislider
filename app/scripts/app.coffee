@@ -23,18 +23,18 @@ angular.module('nouislider', [])
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: scope.step or 1
           connect: true
-        ).change((ev) ->
-          [from, to] = slider.val()
+          slide: ->
+            [from, to] = slider.val()
 
-          fromParsed = parseFloat from
-          toParsed = parseFloat to
+            fromParsed = parseFloat from
+            toParsed = parseFloat to
 
-          scope.values = [fromParsed, toParsed]
+            scope.values = [fromParsed, toParsed]
 
-          scope.$apply(->
-            scope.ngFrom = fromParsed
-            scope.ngTo = toParsed
-          )
+            scope.$apply(->
+              scope.ngFrom = fromParsed
+              scope.ngTo = toParsed
+            )
         )
 
         scope.$watch('ngFrom', (newVal, oldVal) ->
@@ -54,12 +54,12 @@ angular.module('nouislider', [])
           start: scope.ngModel or scope.start,
           step: scope.step or 1
           handles: 1
-        ).change((ev) ->
-          parsedValue = slider.val()
+          slide: ->
+            parsedValue = slider.val()
 
-          scope.$apply(->
-            scope.ngModel = parseFloat parsedValue
-          )
+            scope.$apply(->
+              scope.ngModel = parseFloat parsedValue
+            )
         )
 
         scope.$watch('ngModel', (newVal, oldVal) ->
