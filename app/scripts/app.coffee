@@ -7,7 +7,7 @@ angular.module('nouislider', [])
       start: "@"
       step: "@"
       end: "@"
-      live: "@"
+      callback: "@"
       ngModel: "="
       ngFrom: "="
       ngTo: "="
@@ -15,7 +15,7 @@ angular.module('nouislider', [])
     link: (scope, element, attrs) ->
       slider = $(element)
 
-      callbackType = if scope.live then 'slide' else 'set'
+      callback = if scope.callback then scope.callback else 'slide'
 
       if scope.ngFrom? and scope.ngTo?
         fromParsed = null
@@ -26,18 +26,19 @@ angular.module('nouislider', [])
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: scope.step or 1
           connect: true
-        config[callbackType] = ->
-            [from, to] = slider.val()
 
-            fromParsed = parseFloat from
-            toParsed = parseFloat to
+        config[callback] = ->
+          [from, to] = slider.val()
 
-            scope.values = [fromParsed, toParsed]
+          fromParsed = parseFloat from
+          toParsed = parseFloat to
 
-            scope.$apply(->
-              scope.ngFrom = fromParsed
-              scope.ngTo = toParsed
-            )
+          scope.values = [fromParsed, toParsed]
+
+          scope.$apply(->
+            scope.ngFrom = fromParsed
+            scope.ngTo = toParsed
+          )
 
         slider.noUiSlider(config)
 
@@ -58,12 +59,13 @@ angular.module('nouislider', [])
           start: scope.ngModel or scope.start,
           step: scope.step or 1
           handles: 1
-        config[callbackType] = ->
-            parsedValue = slider.val()
 
-            scope.$apply(->
-              scope.ngModel = parseFloat parsedValue
-            )
+        config[callback] = ->
+          parsedValue = slider.val()
+
+          scope.$apply(->
+            scope.ngModel = parseFloat parsedValue
+          )
 
         slider.noUiSlider(config)
 

@@ -12,7 +12,7 @@
   <p>To data: <input type="number" ng-model="test.to"></p>
 
   <h4 ng-init="test.live = 2">Live slider example:</h4>
-  <div slider ng-attr-live=true ng-model="test.live" start=1 end=10></div>
+  <div slider callback='set' ng-model="test.live" start=1 end=10></div>
   <p>Binded data: <span ng-bind="test.live"></span></p>
   <p>Data: <input type="number" ng-model="test.live"></p>
 </div>
