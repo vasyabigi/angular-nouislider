@@ -29,6 +29,13 @@ angular.module('MyApp', ['nouislider']);
 <div slider ng-from="test.from" ng-to="test.to" start=0 end=100 step=5></div>
 ```
 
+- If you don't want to wait that the slider is released before the model is updated, use the `live` attribute
+
+```html
+<div slider ng-model="test.single" start=1 end=10 live=true></div>
+<div slider ng-from="test.from" ng-to="test.to" start=0 end=100 step=5 ng-attr-live=true></div>
+```
+
 That's it!
 
 ### Screenshot:
