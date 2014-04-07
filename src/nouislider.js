@@ -15,19 +15,19 @@ angular.module('nouislider', []).directive('slider', function () {
       var callback, config, fromParsed, parsedValue, slider, toParsed;
       slider = $(element);
       callback = scope.callback ? scope.callback : 'slide';
-      if (scope.ngFrom != null && scope.ngTo != null) {
+      if (attrs.ngFrom && attrs.ngTo) {
         fromParsed = null;
         toParsed = null;
         config = {
-          range: [
-            scope.start,
-            scope.end
-          ],
+          range: {
+            'min': parseFloat(scope.start, 10),
+            'max': parseFloat(scope.end, 10)
+          },
           start: [
-            scope.ngFrom || scope.start,
-            scope.ngTo || scope.end
+            scope.ngFrom || parseFloat(scope.start, 10),
+            scope.ngTo || parseFloat(scope.end, 10)
           ],
-          step: scope.step || 1,
+          step: parseFloat(scope.step, 10) || 1,
           connect: true
         };
         config[callback] = function () {
@@ -64,12 +64,12 @@ angular.module('nouislider', []).directive('slider', function () {
       } else {
         parsedValue = null;
         config = {
-          range: [
-            scope.start,
-            scope.end
-          ],
-          start: scope.ngModel || scope.start,
-          step: scope.step || 1,
+          range: {
+            'min': parseFloat(scope.start, 10),
+            'max': parseFloat(scope.end, 10)
+          },
+          start: scope.ngModel || parseFloat(scope.start, 10),
+          step: parseFloat(scope.step, 10) || 1,
           handles: 1
         };
         config[callback] = function () {
