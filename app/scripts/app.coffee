@@ -13,6 +13,8 @@ angular.module('nouislider', [])
       ngTo: "="
 
     link: (scope, element, attrs) ->
+      Link = $.noUiSlider.Link
+
       slider = $(element)
 
       callback = if scope.callback then scope.callback else 'slide'
@@ -21,26 +23,26 @@ angular.module('nouislider', [])
         fromParsed = null
         toParsed = null
 
-        config =
-          range: [scope.start, scope.end]
+        slider.noUiSlider
+          handles: 1
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
-          step: scope.step or 1
+          step: parseFloat(scope.step or 1)
           connect: true
+          range:
+            min: parseFloat scope.start
+            max: parseFloat scope.end
 
-        config[callback] = ->
+
+        slider.on callback, ->
           [from, to] = slider.val()
 
           fromParsed = parseFloat from
           toParsed = parseFloat to
 
-          scope.values = [fromParsed, toParsed]
-
           scope.$apply(->
             scope.ngFrom = fromParsed
             scope.ngTo = toParsed
           )
-
-        slider.noUiSlider(config)
 
         scope.$watch('ngFrom', (newVal, oldVal) ->
           if newVal isnt fromParsed
@@ -54,20 +56,18 @@ angular.module('nouislider', [])
       else
         parsedValue = null
 
-        config =
-          range: [scope.start, scope.end],
-          start: scope.ngModel or scope.start,
-          step: scope.step or 1
+        slider.noUiSlider
           handles: 1
+          start: scope.ngModel or scope.start,
+          step: parseFloat(scope.step or 1)
+          range:
+            min: parseFloat scope.start
+            max: parseFloat scope.end
 
-        config[callback] = ->
-          parsedValue = slider.val()
-
-          scope.$apply(->
-            scope.ngModel = parseFloat parsedValue
-          )
-
-        slider.noUiSlider(config)
+        slider.on callback, ->
+          parsedValue = parseFloat slider.val()
+          scope.$apply ->
+            scope.ngModel = parsedValue
 
         scope.$watch('ngModel', (newVal, oldVal) ->
           if newVal isnt parsedValue
