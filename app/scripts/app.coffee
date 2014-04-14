@@ -8,13 +8,12 @@ angular.module('nouislider', [])
       step: "@"
       end: "@"
       callback: "@"
+      margin: "@"
       ngModel: "="
       ngFrom: "="
       ngTo: "="
 
     link: (scope, element, attrs) ->
-      Link = $.noUiSlider.Link
-
       slider = $(element)
 
       callback = if scope.callback then scope.callback else 'slide'
@@ -28,6 +27,7 @@ angular.module('nouislider', [])
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: parseFloat(scope.step or 1)
           connect: true
+          margin: parseFloat(scope.margin or 0)
           range:
             min: parseFloat scope.start
             max: parseFloat scope.end
