@@ -13,6 +13,7 @@ Simple angular directive for jquery [nouislider](http://refreshless.com/nouislid
 <script src="bower_components/jquery/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/nouislider/jquery.nouislider.js"></script>
+<script src="bower_components/nouislider/Link.js"></script>
 <script src="bower_components/angular-nouislider/src/nouislider.js"></script>
 ```
 
