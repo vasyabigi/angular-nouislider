@@ -7,29 +7,29 @@ angular.module('nouislider', []).directive('slider', function () {
       step: '@',
       end: '@',
       callback: '@',
+      margin: '@',
       ngModel: '=',
       ngFrom: '=',
       ngTo: '='
     },
     link: function (scope, element, attrs) {
-      var Link, callback, fromParsed, parsedValue, slider, toParsed;
-      Link = $.noUiSlider.Link;
+      var callback, fromParsed, parsedValue, slider, toParsed;
       slider = $(element);
       callback = scope.callback ? scope.callback : 'slide';
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
         slider.noUiSlider({
-          handles: 1,
           start: [
             scope.ngFrom || scope.start,
             scope.ngTo || scope.end
           ],
           step: parseFloat(scope.step || 1),
           connect: true,
+          margin: parseFloat(scope.margin || 0),
           range: {
-            min: parseFloat(scope.start),
-            max: parseFloat(scope.end)
+            min: [parseFloat(scope.start)],
+            max: [parseFloat(scope.end)]
           }
         });
         slider.on(callback, function () {
@@ -61,12 +61,11 @@ angular.module('nouislider', []).directive('slider', function () {
       } else {
         parsedValue = null;
         slider.noUiSlider({
-          handles: 1,
-          start: scope.ngModel || scope.start,
+          start: [scope.ngModel || scope.start],
           step: parseFloat(scope.step || 1),
           range: {
-            min: parseFloat(scope.start),
-            max: parseFloat(scope.end)
+            min: [parseFloat(scope.start)],
+            max: [parseFloat(scope.end)]
           }
         });
         slider.on(callback, function () {
