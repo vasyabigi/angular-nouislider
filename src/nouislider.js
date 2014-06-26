@@ -13,9 +13,24 @@ angular.module('nouislider', []).directive('slider', function () {
       ngTo: '='
     },
     link: function (scope, element, attrs) {
-      var callback, fromParsed, parsedValue, slider, toParsed;
+      var callback, fromParsed, parsedValue, range, slider, toParsed;
       slider = $(element);
       callback = scope.callback ? scope.callback : 'slide';
+      range = {
+        min: [parseFloat(scope.start || 0)],
+        max: [parseFloat(scope.end || 100)]
+      };
+      scope.$watch('start', function (value) {
+        range.min = [parseFloat(value || 0)];
+        return slider.noUiSlider({ range: range }, true);
+      });
+      scope.$watch('end', function (value) {
+        range.max = [parseFloat(value || 100)];
+        return slider.noUiSlider({ range: range }, true);
+      });
+      scope.$watch('step', function (value) {
+        return slider.noUiSlider({ step: parseFloat(value || 1) }, true);
+      });
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
@@ -27,10 +42,7 @@ angular.module('nouislider', []).directive('slider', function () {
           step: parseFloat(scope.step || 1),
           connect: true,
           margin: parseFloat(scope.margin || 0),
-          range: {
-            min: [parseFloat(scope.start)],
-            max: [parseFloat(scope.end)]
-          }
+          range: range
         });
         slider.on(callback, function () {
           var from, to, _ref;
@@ -63,10 +75,7 @@ angular.module('nouislider', []).directive('slider', function () {
         slider.noUiSlider({
           start: [scope.ngModel || scope.start],
           step: parseFloat(scope.step || 1),
-          range: {
-            min: [parseFloat(scope.start)],
-            max: [parseFloat(scope.end)]
-          }
+          range: range
         });
         slider.on(callback, function () {
           parsedValue = parseFloat(slider.val());
@@ -82,4 +91,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/

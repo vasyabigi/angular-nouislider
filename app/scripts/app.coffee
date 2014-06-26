@@ -18,6 +18,24 @@ angular.module('nouislider', [])
 
       callback = if scope.callback then scope.callback else 'slide'
 
+      range =
+        min: [parseFloat scope.start or 0]
+        max: [parseFloat scope.end or 100]
+
+      scope.$watch('start', (value) ->
+        range.min = [parseFloat value or 0];
+        slider.noUiSlider({ range: range }, true)
+      )
+
+      scope.$watch('end', (value) ->
+        range.max = [parseFloat value or 100];
+        slider.noUiSlider({ range: range }, true)
+      )
+
+      scope.$watch('step', (value) ->
+        slider.noUiSlider({ step: parseFloat value or 1 }, true)
+      )
+
       if scope.ngFrom? and scope.ngTo?
         fromParsed = null
         toParsed = null
@@ -27,10 +45,7 @@ angular.module('nouislider', [])
           step: parseFloat(scope.step or 1)
           connect: true
           margin: parseFloat(scope.margin or 0)
-          range:
-            min: [parseFloat scope.start]
-            max: [parseFloat scope.end]
-
+          range: range
 
         slider.on callback, ->
           [from, to] = slider.val()
@@ -58,9 +73,7 @@ angular.module('nouislider', [])
         slider.noUiSlider
           start: [scope.ngModel or scope.start],
           step: parseFloat(scope.step or 1)
-          range:
-            min: [parseFloat scope.start]
-            max: [parseFloat scope.end]
+          range: range
 
         slider.on callback, ->
           parsedValue = parseFloat slider.val()
