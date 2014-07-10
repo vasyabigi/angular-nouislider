@@ -8,18 +8,50 @@ angular.module('nouislider', []).directive('slider', function () {
       end: '@',
       callback: '@',
       margin: '@',
+      connect: '@',
+      orientation: '@',
+      lowerTooltipTarget: '=',
+      lowerTooltipMethod: '&',
+      lowerTooltipFormat: '=',
+      upperTooltipTarget: '=',
+      upperTooltipMethod: '&',
+      upperTooltipFormat: '=',
+      direction: '@',
       ngModel: '=',
       ngFrom: '=',
       ngTo: '='
     },
     link: function (scope, element, attrs) {
-      var callback, fromParsed, parsedValue, slider, toParsed;
+      var callback, config, fromParsed, parsedValue, setupTooltip, slider, toParsed;
       slider = $(element);
       callback = scope.callback ? scope.callback : 'slide';
+      setupTooltip = function (target, method, format, config, handle) {
+        var atLeastOne, linkConfig;
+        linkConfig = {};
+        atLeastOne = false;
+        if (target) {
+          linkConfig.target = target;
+          atLeastOne = true;
+        }
+        if (method && method()) {
+          linkConfig.method = method();
+          atLeastOne = true;
+        }
+        if (format) {
+          linkConfig.format = format;
+          atLeastOne = true;
+        }
+        if (atLeastOne) {
+          if (!config.serialization) {
+            config.serialization = {};
+          }
+          return config.serialization[handle || 'lower'] = [$.Link(linkConfig)];
+        }
+      };
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
-        slider.noUiSlider({
+        config = {
           start: [
             scope.ngFrom || scope.start,
             scope.ngTo || scope.end
@@ -27,11 +59,16 @@ angular.module('nouislider', []).directive('slider', function () {
           step: parseFloat(scope.step || 1),
           connect: true,
           margin: parseFloat(scope.margin || 0),
+          orientation: scope.orientation || 'horizontal',
+          direction: scope.direction || 'ltr',
           range: {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
           }
-        });
+        };
+        setupTooltip(scope.lowerTooltipTarget, scope.lowerTooltipMethod, scope.lowerTooltipFormat, config);
+        setupTooltip(scope.upperTooltipTarget, scope.upperTooltipMethod, scope.upperTooltipFormat, config, 'upper');
+        slider.noUiSlider(config);
         slider.on(callback, function () {
           var from, to, _ref;
           _ref = slider.val(), from = _ref[0], to = _ref[1];
@@ -60,14 +97,19 @@ angular.module('nouislider', []).directive('slider', function () {
         });
       } else {
         parsedValue = null;
-        slider.noUiSlider({
+        config = {
           start: [scope.ngModel || scope.start],
           step: parseFloat(scope.step || 1),
+          connect: scope.connect || false,
+          orientation: scope.orientation || 'horizontal',
+          direction: scope.direction || 'ltr',
           range: {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
           }
-        });
+        };
+        setupTooltip(scope.lowerTooltipTarget, scope.lowerTooltipMethod, scope.lowerTooltipFormat, config);
+        slider.noUiSlider(config);
         slider.on(callback, function () {
           parsedValue = parseFloat(slider.val());
           return scope.$apply(function () {
@@ -82,4 +124,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/
