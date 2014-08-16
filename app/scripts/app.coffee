@@ -4,9 +4,8 @@ angular.module('nouislider', [])
   .directive "slider", () ->
     restrict: "A"
     scope:
-      start: "@"
+      range: "="
       step: "@"
-      end: "@"
       callback: "@"
       margin: "@"
       ngModel: "="
@@ -22,14 +21,16 @@ angular.module('nouislider', [])
         fromParsed = null
         toParsed = null
 
-        slider.noUiSlider
+        sliderConfig =
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: parseFloat(scope.step or 1)
           connect: true
-          margin: parseFloat(scope.margin or 0)
-          range:
-            min: [parseFloat scope.start]
-            max: [parseFloat scope.end]
+          range: scope.range
+
+        if scope.margin
+          sliderConfig['margin'] = scope.margin
+
+        slider.noUiSlider(sliderConfig)
 
 
         slider.on callback, ->
