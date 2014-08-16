@@ -33,8 +33,8 @@ $scope.test = {
         max: 100
     },
     selected: {
-        min: 3,
-        max: 6
+        from: 3,
+        to: 6
     }
 };
 ```
