@@ -85,6 +85,7 @@ angular.module('nouislider', []).directive('slider', function () {
         });
         return scope.$watch('ngModel', function (newVal, oldVal) {
           if (newVal !== parsedValue) {
+            parsedValue = null;
             return slider.val(newVal);
           }
         });
