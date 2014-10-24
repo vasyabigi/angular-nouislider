@@ -6,6 +6,8 @@ angular.module('nouislider', []).directive('slider', function () {
       start: '@',
       step: '@',
       end: '@',
+      connect: '@',
+      orientation: '@',
       callback: '@',
       margin: '@',
       ngModel: '=',
@@ -25,8 +27,9 @@ angular.module('nouislider', []).directive('slider', function () {
             scope.ngTo || scope.end
           ],
           step: parseFloat(scope.step || 1),
-          connect: true,
+          connect: scope.connect || true,
           margin: parseFloat(scope.margin || 0),
+          orientation: scope.orientation || 'horizontal',
           range: {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
@@ -82,4 +85,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/
