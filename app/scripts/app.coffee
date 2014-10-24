@@ -7,6 +7,8 @@ angular.module('nouislider', [])
       start: "@"
       step: "@"
       end: "@"
+      connect: "@"
+      orientation: "@"
       callback: "@"
       margin: "@"
       ngModel: "="
@@ -25,8 +27,9 @@ angular.module('nouislider', [])
         slider.noUiSlider
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: parseFloat(scope.step or 1)
-          connect: true
+          connect: scope.connect || true
           margin: parseFloat(scope.margin or 0)
+          orientation: scope.orientation || "horizontal"
           range:
             min: [parseFloat scope.start]
             max: [parseFloat scope.end]

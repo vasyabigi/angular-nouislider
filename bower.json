@@ -1,7 +1,7 @@
 {
   "name": "angular-nouislider",
   "homepage": "http://vasyabigi.github.io/angular-nouislider/",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "src/nouislider.js",
   "ignore": [
     "app"
@@ -20,6 +20,15 @@
     "nouislider": "~6.2.0"
   },
   "author": {
-    "name": "Vasyl Stanislavchuk"
-  }
+    "name": "Hirtie Maxim"
+  },
+  "_release": "0.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.3.1",
+    "commit": "7fb692b93865566d7d4f089d3de92bccbd0e8cc5"
+  },
+  "_source": "git://github.com/hirtie-maxim/angular-nouislider.git",
+  "_target": "~0.3.1",
+  "_originalSource": "hm-angular-nouislider"
 }
