@@ -60,7 +60,6 @@ angular.module('nouislider', []).directive('slider', function () {
         });
       } else {
         parsedValue = null;
-        console.log(scope.range.min);
         sliderConfig = {
           start: [scope.ngModel || scope.range.min],
           step: parseFloat(scope.step || 1),
