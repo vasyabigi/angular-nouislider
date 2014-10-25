@@ -6,6 +6,7 @@ angular.module('nouislider', [])
     scope:
       range: "="
       step: "@"
+      connect: "@"
       callback: "@"
       margin: "@"
       ngModel: "="
@@ -22,7 +23,7 @@ angular.module('nouislider', [])
         toParsed = null
 
         sliderConfig =
-          start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
+          start: [scope.ngFrom or scope.range.min, scope.ngTo or scope.range.max]
           step: parseFloat(scope.step or 1)
           connect: true
           range: scope.range
@@ -55,13 +56,15 @@ angular.module('nouislider', [])
         )
       else
         parsedValue = null
-
-        slider.noUiSlider
-          start: [scope.ngModel or scope.start],
+        sliderConfig =
+          start: [scope.ngModel or scope.range.min]
           step: parseFloat(scope.step or 1)
-          range:
-            min: [parseFloat scope.start]
-            max: [parseFloat scope.end]
+          range: scope.range
+
+        if scope.connect
+          sliderConfig['connect'] = scope.connect
+
+        slider.noUiSlider(sliderConfig)
 
         slider.on callback, ->
           parsedValue = parseFloat slider.val()
