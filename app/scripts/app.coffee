@@ -4,12 +4,12 @@ angular.module('nouislider', [])
   .directive "slider", () ->
     restrict: "A"
     scope:
-      start: "@"
-      step: "@"
-      end: "@"
       callback: "@"
       margin: "@"
       behaviour: '@'
+      end: "="
+      start: "="
+      step: "="
       ngModel: "="
       ngFrom: "="
       ngTo: "="
