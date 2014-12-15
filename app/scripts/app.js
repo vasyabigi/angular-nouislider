@@ -21,8 +21,8 @@ angular.module('nouislider', []).directive('slider', function () {
         toParsed = null;
         slider.noUiSlider({
           start: [
-            scope.ngFrom || scope.start,
-            scope.ngTo || scope.end
+            parseFloat(scope.ngFrom) || parseFloat(scope.start),
+            parseFloat(scope.ngTo) || parseFloat(scope.end)
           ],
           step: parseFloat(scope.step || 1),
           connect: true,
@@ -31,7 +31,10 @@ angular.module('nouislider', []).directive('slider', function () {
           range: {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
-          }
+          },
+          format: {
+              decimals: 0
+            }
         });
         slider.on(callback, function () {
           var from, to, _ref;

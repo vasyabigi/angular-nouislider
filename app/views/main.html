@@ -1,5 +1,5 @@
 <div>
   <!-- You have to bind the too and from values to a scope, init does it here ( bad practice ) -->
-  <h4 ng-init="test.from = 30; test.to = 60">Range example:</h4>
-  <div slider ng-from="test.from" ng-to="test.to" start=0 end=100 behaviour='drag-fixed'></div>
+  <h4 ng-init="test.from = 0; test.to = 1; test.duration = 2.5">Range example:</h4>
+  <div slider ng-from="test.from" ng-to="test.to" start="0" end="test.duration" behaviour='drag-fixed' step=0.01></div>
 </div>
