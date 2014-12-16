@@ -1,4 +1,4 @@
-angular-nouislider
+        angular-nouislider
 ==================
 
 Simple angular directive for jquery [nouislider](http://refreshless.com/nouislider/) plugin. Demo is [here](http://vasyabigi.github.io/angular-nouislider/).

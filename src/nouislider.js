@@ -3,11 +3,12 @@ angular.module('nouislider', []).directive('slider', function () {
   return {
     restrict: 'A',
     scope: {
-      start: '@',
-      step: '@',
-      end: '@',
       callback: '@',
       margin: '@',
+      behaviour: '@',
+      end: '=',
+      start: '=',
+      step: '=',
       ngModel: '=',
       ngFrom: '=',
       ngTo: '='
@@ -21,11 +22,12 @@ angular.module('nouislider', []).directive('slider', function () {
         toParsed = null;
         slider.noUiSlider({
           start: [
-            scope.ngFrom || scope.start,
-            scope.ngTo || scope.end
+            parseFloat(scope.ngFrom) || parseFloat(scope.start),
+            parseFloat(scope.ngTo) || parseFloat(scope.end)
           ],
           step: parseFloat(scope.step || 1),
           connect: true,
+          behaviour: scope.behaviour || 'drag',
           margin: parseFloat(scope.margin || 0),
           range: {
             min: [parseFloat(scope.start)],
@@ -82,4 +84,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/
