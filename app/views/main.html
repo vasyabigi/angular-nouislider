@@ -6,7 +6,7 @@
   <p>Data: <input type="number" ng-model="test.first"></p>
 
   <h4 ng-init="test.from = 5; test.to = 10">Range example:</h4>
-  <div slider ng-from="test.from" ng-to="test.to" start=0 end=30 step=0.5 margin=3></div>
+  <div slider ng-from="test.from" ng-to="test.to" start=0 end=30 step=0.5 margin=3 direction="rtl"></div>
   <p>Binded data: from - <span ng-bind="test.from"></span>, to - <span ng-bind="test.to"></span></p>
   <p>From data: <input type="number" ng-model="test.from"></p>
   <p>To data: <input type="number" ng-model="test.to"></p>

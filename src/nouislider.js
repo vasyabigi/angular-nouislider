@@ -6,6 +6,7 @@ angular.module('nouislider', []).directive('slider', function () {
       start: '@',
       step: '@',
       end: '@',
+      direction: '@',
       callback: '@',
       margin: '@',
       ngModel: '=',
@@ -26,6 +27,7 @@ angular.module('nouislider', []).directive('slider', function () {
           ],
           step: parseFloat(scope.step || 1),
           connect: true,
+          direction: scope.direction,
           margin: parseFloat(scope.margin || 0),
           range: {
             min: [parseFloat(scope.start)],
@@ -82,4 +84,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/

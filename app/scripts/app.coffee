@@ -7,6 +7,7 @@ angular.module('nouislider', [])
       start: "@"
       step: "@"
       end: "@"
+      direction: "@"
       callback: "@"
       margin: "@"
       ngModel: "="
@@ -26,6 +27,7 @@ angular.module('nouislider', [])
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: parseFloat(scope.step or 1)
           connect: true
+          direction: scope.direction
           margin: parseFloat(scope.margin or 0)
           range:
             min: [parseFloat scope.start]
