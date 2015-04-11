@@ -6,6 +6,7 @@ angular.module('nouislider', []).directive('slider', function () {
       start: '@',
       step: '@',
       end: '@',
+      range: '=',
       callback: '@',
       margin: '@',
       ngModel: '=',
@@ -13,25 +14,30 @@ angular.module('nouislider', []).directive('slider', function () {
       ngTo: '='
     },
     link: function (scope, element, attrs) {
-      var callback, fromParsed, parsedValue, slider, toParsed;
+      var callback, fromParsed, options, parsedValue, slider, toParsed;
       slider = $(element);
       callback = scope.callback ? scope.callback : 'slide';
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
-        slider.noUiSlider({
+        options = {
           start: [
             scope.ngFrom || scope.start,
             scope.ngTo || scope.end
           ],
           step: parseFloat(scope.step || 1),
-          connect: true,
-          margin: parseFloat(scope.margin || 0),
-          range: {
+          connect: true
+        };
+        if (scope.range) {
+          options.range = scope.range;
+        } else {
+          options.margin = parseFloat(scope.margin || 0);
+          options.range = {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
-          }
-        });
+          };
+        }
+        slider.noUiSlider(options);
         slider.on(callback, function () {
           var from, to, _ref;
           _ref = slider.val(), from = _ref[0], to = _ref[1];
@@ -63,7 +69,7 @@ angular.module('nouislider', []).directive('slider', function () {
         slider.noUiSlider({
           start: [scope.ngModel || scope.start],
           step: parseFloat(scope.step || 1),
-          range: {
+          range: scope.range || {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
           }
@@ -82,4 +88,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/
