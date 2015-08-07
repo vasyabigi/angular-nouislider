@@ -6,6 +6,7 @@ angular.module('nouislider', []).directive('slider', function () {
       start: '@',
       step: '@',
       end: '@',
+      behaviour: '@',
       callback: '@',
       margin: '@',
       ngModel: '=',
@@ -16,6 +17,7 @@ angular.module('nouislider', []).directive('slider', function () {
       var callback, fromParsed, parsedValue, slider, toParsed;
       slider = $(element);
       callback = scope.callback ? scope.callback : 'slide';
+      if (scope.behaviour === undefined) { scope.behaviour = 'drag'; }
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
@@ -25,6 +27,7 @@ angular.module('nouislider', []).directive('slider', function () {
             scope.ngTo || scope.end
           ],
           step: parseFloat(scope.step || 1),
+          behaviour: scope.behaviour,
           connect: true,
           margin: parseFloat(scope.margin || 0),
           range: {
@@ -66,7 +69,8 @@ angular.module('nouislider', []).directive('slider', function () {
           range: {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
-          }
+          },
+          behaviour: scope.behaviour,
         });
         slider.on(callback, function () {
           parsedValue = parseFloat(slider.val());
