@@ -10,10 +10,9 @@ Simple angular directive for jquery [nouislider](http://refreshless.com/nouislid
 
 ```html
 <link rel="stylesheet" href="bower_components/nouislider/jquery.nouislider.css" />
-<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/nouislider/distribute/nouislider.js"></script>
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/nouislider/jquery.nouislider.js"></script>
-<script src="bower_components/nouislider/Link.js"></script>
 <script src="bower_components/angular-nouislider/src/nouislider.js"></script>
 ```
 
