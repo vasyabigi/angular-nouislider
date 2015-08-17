@@ -1,7 +1,9 @@
-angular-nouislider
-==================
+angular-nouislider-sjr
+======================
 
-Simple angular directive for jquery [nouislider](http://refreshless.com/nouislider/) plugin. Demo is [here](http://vasyabigi.github.io/angular-nouislider/).
+Updated version of [angular-nouislider](https://github.com/vasyabigi/angular-nouislider) by Vasyl Stanislavchuk.  Now using noUiSlider version 8.0.2.
+
+Simple angular directive for jquery [nouislider](http://refreshless.com/nouislider/) plugin.
 
 ### Usage:
 

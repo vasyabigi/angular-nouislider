@@ -1,7 +1,7 @@
 {
-  "name": "angular-nouislider",
-  "homepage": "http://vasyabigi.github.io/angular-nouislider/",
-  "version": "0.3.1",
+  "name": "angular-nouislider-sjr",
+  "homepage": "https://github.com/SteveJRobertson/angular-nouislider/",
+  "version": "0.0.1",
   "main": "src/nouislider.js",
   "ignore": [
     "app"
@@ -20,6 +20,6 @@
     "nouislider": "~8.0.2"
   },
   "author": {
-    "name": "Vasyl Stanislavchuk"
+    "name": "Steve Robertson"
   }
 }
