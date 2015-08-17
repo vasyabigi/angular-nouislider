@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('nouislider', [])
-  .directive "slider", () ->
+  .directive "slider", ($timeout) ->
     restrict: "A"
     scope:
       start: "@"
@@ -14,7 +14,7 @@ angular.module('nouislider', [])
       ngTo: "="
 
     link: (scope, element, attrs) ->
-      slider = $(element)
+      slider = element[0]
 
       callback = if scope.callback then scope.callback else 'slide'
 
@@ -22,7 +22,7 @@ angular.module('nouislider', [])
         fromParsed = null
         toParsed = null
 
-        slider.noUiSlider
+        noUiSlider.create slider,
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: parseFloat(scope.step or 1)
           connect: true
@@ -32,8 +32,8 @@ angular.module('nouislider', [])
             max: [parseFloat scope.end]
 
 
-        slider.on callback, ->
-          [from, to] = slider.val()
+        slider.noUiSlider.on callback, ->
+          [from, to] = slider.noUiSlider.get()
 
           fromParsed = parseFloat from
           toParsed = parseFloat to
@@ -45,29 +45,30 @@ angular.module('nouislider', [])
 
         scope.$watch('ngFrom', (newVal, oldVal) ->
           if newVal isnt fromParsed
-            slider.val([newVal, null])
+            slider.noUiSlider.set([newVal, null])
         )
 
         scope.$watch('ngTo', (newVal, oldVal) ->
           if newVal isnt toParsed
-            slider.val([null, newVal])
+            slider.noUiSlider.set([null, newVal])
         )
       else
         parsedValue = null
 
-        slider.noUiSlider
+        noUiSlider.create slider, 
           start: [scope.ngModel or scope.start],
           step: parseFloat(scope.step or 1)
           range:
             min: [parseFloat scope.start]
             max: [parseFloat scope.end]
 
-        slider.on callback, ->
-          parsedValue = parseFloat slider.val()
-          scope.$apply ->
-            scope.ngModel = parsedValue
+        slider.noUiSlider.on callback, ->
+          parsedValue = parseFloat slider.noUiSlider.get()
+          $timeout ->
+            scope.$apply ->
+              scope.ngModel = parsedValue
 
         scope.$watch('ngModel', (newVal, oldVal) ->
           if newVal isnt parsedValue
-            slider.val(newVal)
+            slider.noUiSlider.set(newVal)
         )
