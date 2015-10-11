@@ -7,6 +7,7 @@ angular.module('nouislider', []).directive('slider', function () {
       step: '@',
       end: '@',
       callback: '@',
+      orientation: '@',
       margin: '@',
       ngModel: '=',
       ngFrom: '=',
@@ -16,6 +17,9 @@ angular.module('nouislider', []).directive('slider', function () {
       var callback, fromParsed, parsedValue, slider, toParsed;
       slider = $(element);
       callback = scope.callback ? scope.callback : 'slide';
+      if (scope.orientation != 'vertical' && scope.orientation != 'horizontal') {
+        scope.orientation = 'horizontal';
+      }
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
@@ -26,6 +30,7 @@ angular.module('nouislider', []).directive('slider', function () {
           ],
           step: parseFloat(scope.step || 1),
           connect: true,
+          orientation: scope.orientation,
           margin: parseFloat(scope.margin || 0),
           range: {
             min: [parseFloat(scope.start)],
