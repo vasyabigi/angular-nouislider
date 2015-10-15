@@ -10,16 +10,26 @@ angular.module('nouislider', []).directive('slider', function () {
       margin: '@',
       ngModel: '=',
       ngFrom: '=',
-      ngTo: '='
+      ngTo: '=',
+      options: '@?'
     },
     link: function (scope, element, attrs) {
-      var callback, fromParsed, parsedValue, slider, toParsed;
+      var callback, fromParsed, parsedValue, slider, toParsed, options = {};
+
+      if (scope.options) { options = scope.options; }
+
       slider = $(element);
+
+      function initSliderWithOptions(customOptions) {
+        slider.noUiSlider($.extend(options, customOptions));
+      }
+
       callback = scope.callback ? scope.callback : 'slide';
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
-        slider.noUiSlider({
+
+        initSliderWithOptions({
           start: [
             scope.ngFrom || scope.start,
             scope.ngTo || scope.end
@@ -60,7 +70,7 @@ angular.module('nouislider', []).directive('slider', function () {
         });
       } else {
         parsedValue = null;
-        slider.noUiSlider({
+        initSliderWithOptions({
           start: [scope.ngModel || scope.start],
           step: parseFloat(scope.step || 1),
           range: {
