@@ -11,7 +11,7 @@ angular.module('nouislider', []).directive('slider', function () {
       ngModel: '=',
       ngFrom: '=',
       ngTo: '=',
-      options: '@?'
+      options: '=?'
     },
     link: function (scope, element, attrs) {
       var callback, fromParsed, parsedValue, slider, toParsed, options = {};
