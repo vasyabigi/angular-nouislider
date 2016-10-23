@@ -1,6 +1,6 @@
-'use strict'
+ 'use strict'
 
-angular.module('nouislider', [])
+ angular.module('nouislider', [])
   .directive "slider", () ->
     restrict: "A"
     scope:
@@ -14,15 +14,14 @@ angular.module('nouislider', [])
       ngTo: "="
 
     link: (scope, element, attrs) ->
-      slider = $(element)
+      slider = element[0]
 
       callback = if scope.callback then scope.callback else 'slide'
 
       if scope.ngFrom? and scope.ngTo?
         fromParsed = null
         toParsed = null
-
-        slider.noUiSlider
+        opts =
           start: [scope.ngFrom or scope.start, scope.ngTo or scope.end]
           step: parseFloat(scope.step or 1)
           connect: true
@@ -30,10 +29,10 @@ angular.module('nouislider', [])
           range:
             min: [parseFloat scope.start]
             max: [parseFloat scope.end]
-
+        slider = noUiSlider.create slider, opts
 
         slider.on callback, ->
-          [from, to] = slider.val()
+          [from, to] = slider.get()
 
           fromParsed = parseFloat from
           toParsed = parseFloat to
@@ -45,29 +44,29 @@ angular.module('nouislider', [])
 
         scope.$watch('ngFrom', (newVal, oldVal) ->
           if newVal isnt fromParsed
-            slider.val([newVal, null])
+            slider.set([newVal, null])
         )
 
         scope.$watch('ngTo', (newVal, oldVal) ->
           if newVal isnt toParsed
-            slider.val([null, newVal])
+            slider.set([null, newVal])
         )
       else
         parsedValue = null
-
-        slider.noUiSlider
+        opts =
           start: [scope.ngModel or scope.start],
           step: parseFloat(scope.step or 1)
           range:
             min: [parseFloat scope.start]
             max: [parseFloat scope.end]
+        slider = noUiSlider.create slider, opts
 
         slider.on callback, ->
-          parsedValue = parseFloat slider.val()
+          parsedValue = parseFloat slider.get()
           scope.$apply ->
             scope.ngModel = parsedValue
 
         scope.$watch('ngModel', (newVal, oldVal) ->
           if newVal isnt parsedValue
-            slider.val(newVal)
+            slider.set(newVal)
         )

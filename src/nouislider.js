@@ -13,13 +13,13 @@ angular.module('nouislider', []).directive('slider', function () {
       ngTo: '='
     },
     link: function (scope, element, attrs) {
-      var callback, fromParsed, parsedValue, slider, toParsed;
+      var callback, fromParsed, opts, parsedValue, slider, toParsed;
       slider = element[0];
       callback = scope.callback ? scope.callback : 'slide';
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
-        slider = noUiSlider.create(slider, {
+        opts = {
           start: [
             scope.ngFrom || scope.start,
             scope.ngTo || scope.end
@@ -31,7 +31,8 @@ angular.module('nouislider', []).directive('slider', function () {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
           }
-        });
+        };
+        slider = noUiSlider.create(slider, opts);
         slider.on(callback, function () {
           var from, to, _ref;
           _ref = slider.get(), from = _ref[0], to = _ref[1];
@@ -60,15 +61,15 @@ angular.module('nouislider', []).directive('slider', function () {
         });
       } else {
         parsedValue = null;
-        slider = noUiSlider.create(slider,{
+        opts = {
           start: [scope.ngModel || scope.start],
           step: parseFloat(scope.step || 1),
           range: {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
           }
-        });
-
+        };
+        slider = noUiSlider.create(slider, opts);
         slider.on(callback, function () {
           parsedValue = parseFloat(slider.get());
           return scope.$apply(function () {
@@ -83,4 +84,6 @@ angular.module('nouislider', []).directive('slider', function () {
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/
