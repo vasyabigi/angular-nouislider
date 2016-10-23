@@ -37,7 +37,7 @@
           fromParsed = parseFloat from
           toParsed = parseFloat to
 
-          scope.$apply(->
+          scope.$evalAsync(->
             scope.ngFrom = fromParsed
             scope.ngTo = toParsed
           )
@@ -63,7 +63,7 @@
 
         slider.on callback, ->
           parsedValue = parseFloat slider.get()
-          scope.$apply ->
+          scope.$evalAsync ->
             scope.ngModel = parsedValue
 
         scope.$watch('ngModel', (newVal, oldVal) ->
