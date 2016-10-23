@@ -13,13 +13,13 @@ angular.module('nouislider', []).directive('slider', function () {
       ngTo: '='
     },
     link: function (scope, element, attrs) {
-      var callback, fromParsed, parsedValue, slider, toParsed;
-      slider = $(element);
+      var callback, fromParsed, opts, parsedValue, slider, toParsed;
+      slider = element[0];
       callback = scope.callback ? scope.callback : 'slide';
       if (scope.ngFrom != null && scope.ngTo != null) {
         fromParsed = null;
         toParsed = null;
-        slider.noUiSlider({
+        opts = {
           start: [
             scope.ngFrom || scope.start,
             scope.ngTo || scope.end
@@ -31,20 +31,21 @@ angular.module('nouislider', []).directive('slider', function () {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
           }
-        });
+        };
+        slider = noUiSlider.create(slider, opts);
         slider.on(callback, function () {
           var from, to, _ref;
-          _ref = slider.val(), from = _ref[0], to = _ref[1];
+          _ref = slider.get(), from = _ref[0], to = _ref[1];
           fromParsed = parseFloat(from);
           toParsed = parseFloat(to);
-          return scope.$apply(function () {
+          return scope.$evalAsync(function () {
             scope.ngFrom = fromParsed;
             return scope.ngTo = toParsed;
           });
         });
         scope.$watch('ngFrom', function (newVal, oldVal) {
           if (newVal !== fromParsed) {
-            return slider.val([
+            return slider.set([
               newVal,
               null
             ]);
@@ -52,7 +53,7 @@ angular.module('nouislider', []).directive('slider', function () {
         });
         return scope.$watch('ngTo', function (newVal, oldVal) {
           if (newVal !== toParsed) {
-            return slider.val([
+            return slider.set([
               null,
               newVal
             ]);
@@ -60,26 +61,29 @@ angular.module('nouislider', []).directive('slider', function () {
         });
       } else {
         parsedValue = null;
-        slider.noUiSlider({
+        opts = {
           start: [scope.ngModel || scope.start],
           step: parseFloat(scope.step || 1),
           range: {
             min: [parseFloat(scope.start)],
             max: [parseFloat(scope.end)]
           }
-        });
+        };
+        slider = noUiSlider.create(slider, opts);
         slider.on(callback, function () {
-          parsedValue = parseFloat(slider.val());
-          return scope.$apply(function () {
+          parsedValue = parseFloat(slider.get());
+          return scope.$evalAsync(function () {
             return scope.ngModel = parsedValue;
           });
         });
         return scope.$watch('ngModel', function (newVal, oldVal) {
           if (newVal !== parsedValue) {
-            return slider.val(newVal);
+            return slider.set(newVal);
           }
         });
       }
     }
   };
-});
+});  /*
+//@ sourceMappingURL=app.js.map
+*/
